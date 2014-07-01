@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  
+  <head>
+    <title>ROI Calculator</title>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <style>
+        #roi-calculator h3 .label-primary, #roi-calculator h1 .label-warning { display: block; width: 100%; white-space: normal;}
+    </style>
+  </head> 
+  <body>
+  <div class="container well" id="roi-calculator">
+  <form id="roi-form">
+    <div class="row">
+        <div class="col-md-12"><h2>Calculate Your Savings from our QuickBooks Integration and Merchant Program!</h2></div>
+    </div>
+    <div class="row">
+        <div id="step1" class="col-md-5">
+            <h3><span class="label label-primary">Step 1 - QuickBooks Integration</span></h3>
+            <br/><br/><br/>
+            <div class="form-group">
+                <label for="iQBHoursSpent">Hours Spent per Month Entering Sales Receipts and Invoice Payments in QuickBooks</label>
+                <input class="form-control" id="iQBHoursSpent" name="iQBHoursSpent" type="number" min="0" required />
+            </div>
+            <div class="form-group">
+                <label for="iQBEmployeeHourly">What is Your/Employee Time Worth per Hour</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input class="form-control"  id="iQBEmployeeHourly" name="iQBEmployeeHourly" type="number" min="1" required/>
+                </div>
+            </div>
+        </div>
+        <div id="totals" class="col-md-2 text-center">
+            <h2>Total Monthly Savings</h2>
+            <h1><span id="oTotalMonthlySavings" class="label label-warning">$ 0.00</span></h1>
+            <h2>Total Annual Savings</h2>
+            <h1><span id="oTotalAnnualSavings" class="label label-warning">$ 0.00</span></h1>
+        </div>
+        <div id="step2" class="col-md-5">
+            <h3><span class="label label-primary">Step 2 - Merchant Services Program</span></h3>
+            <div class="row">
+                <div class="col-md-9">
+                <label>Are the Majority of your Customers Consumers or Businesses?</label>
+                </div>
+                <div class="col-md-3">
+                    <div class="radio">
+                        <label>
+                            <input name="iCustomerType" id="iCustomerType1" type="radio" value="Consumer" checked>
+                            Consumer
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input name="iCustomerType" id="iCustomerType2" type="radio" value="Business">
+                            Business
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="iCPTransactions" class="col-sm-9">Enter % of Transactions Processed Card Present</label>
+                    <div class="input-group col-sm-3">
+                        <input class="form-control" name="iCPTransactions" id="iCPTransactions" type="number" min="1" max="100" required />
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">         
+                <label for="iMonthlySales">Your Average Monthly Sales</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input class="form-control" name="iMonthlySales" id="iMonthlySales" type="number" min="1" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="iAverageTicket">Your Average Ticket</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input class="form-control" name="iAverageTicket" id="iAverageTicket" type="number" min="1" />
+                    </div>
+                </div>
+                <div class="col-md-1"><h3>OR</h3></div>
+                <div class="form-group col-md-6">
+                    <label for="iMonthlyTransactions">Your Monthly # of Transactions</label>
+                    <input class="form-control" name="iMonthlyTransactions" id="iMonthlyTransactions" type="number" min="1" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-7 text-right">
+                    <h3>Monthly Savings</h3>
+                    <h3>Annual Savings</h3>
+                </div>
+                <div class="col-md-5 text-left">
+                    <h3><span id="oQBMonthlySavings" class="label label-primary">$ 0.00</span></h3>
+                    <h3><span id="oQBAnnualSavings" class="label label-primary">$ 0.00</span></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 text-center">
+            <br /><br/>
+            <button type="submit" class="btn btn-warning btn-lg" name="iCalculate" id="iCalculate">Calculate Savings</button>
+            <p id="SendToFriend"><a href="#" class="small">Send Results to a Friend</a><br/>
+            <button type="button" id="resetForm" class="btn btn-default btn-xs">Reset Form</button></p>
+        </div>
+        <div class="col-md-5 text-center">
+            <div class="row">
+                <div class="col-md-7 text-right">
+                    <h3>Monthly Savings</h3>
+                    <h3>Annual Savings</h3>
+                </div>
+                <div class="col-md-5 text-left">
+                    <h3><span id="oMSPMonthlySavings" class="label label-primary">$ 0.00</span></h3>
+                    <h3><span id="oMSPAnnualSavings" class="label label-primary">$ 0.00</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">&nbsp;</div>
+        <div class="col-md-8 text-center"><br/><strong>Most merchants find that the monthly savings more than pays for the monthly cost of the services provided by Avalon Payments, which includes the QuickBooks integration and Merchant Services Program</strong></div>
+        <div class="col-md-2">&nbsp;</div>
+    </div>
+</form>
+</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/roi-calculator.js"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    // ROICalculator('#roi-calculator');
+});
+</script>
+  </body>
+</html>
